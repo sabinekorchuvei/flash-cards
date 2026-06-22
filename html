@@ -1,0 +1,73 @@
+import os
+import time
+
+# Banco de dados inicial de flashcards (Pergunta: Resposta)
+flashcards = {
+    "Qual é a capital da França?": "Paris",
+    "Quanto é 2 + 2?": "4",
+    "O que significa a sigla 'AI' em inglês?": "Artificial Intelligence"
+}
+
+def limpar_tela():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+def iniciar_estudo():
+    if not flashcards:
+        print("\nNenhum flashcard cadastrado ainda!")
+        input("\nPressione Enter para voltar...")
+        return
+
+    print("\n--- Iniciando o Treino ---")
+    total = len(flashcards)
+    acertos = 0
+
+    for pergunta, resposta in flashcards.items():
+        limpar_tela()
+        print(f"PERGUNTA:\n> {pergunta}\n")
+        input("Pressione [ENTER] para ver a resposta...")
+        
+        print(f"\nRESPOSTA CORRETA:\n> {resposta}\n")
+        
+        feedback = input("Você acertou? (s/n): ").strip().lower()
+        if feedback == 's':
+            acertos += 1
+
+    limpar_tela()
+    print("--- Fim do Treino ---")
+    print(f"Você acertou {acertos} de {total} flashcards!")
+    input("\nPressione Enter para voltar ao menu...")
+
+def adicionar_card():
+    limpar_tela()
+    print("--- Criar Novo Flashcard ---")
+    pergunta = input("Digite a pergunta: ").strip()
+    resposta = input("Digite a resposta: ").strip()
+
+    if pergunta and resposta:
+        flashcards[pergunta] = respuesta
+        print("\nFlashcard adicionado com sucesso!")
+    else:
+        print("\nErro: Pergunta ou resposta não podem ficar em branco.")
+    
+    time.sleep(1.5)
+
+# Menu Principal
+while True:
+    limpar_tela()
+    print("=== SISTEMA DE FLASHCARDS ===")
+    print("[1] Iniciar Estudo")
+    print("[2] Adicionar Novo Flashcard")
+    print("[3] Sair")
+    
+    opcao = input("\nEscolha uma opção: ").strip()
+
+    if opcao == '1':
+        iniciar_estudo()
+    elif opcao == '2':
+        adicionar_card()
+    elif opcao == '3':
+        print("\nBons estudos e até logo!")
+        break
+    else:
+        print("\nOpção inválida!")
+        time.sleep(1)
