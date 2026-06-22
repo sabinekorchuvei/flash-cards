@@ -1,0 +1,34 @@
+const deck = [
+    { pergunta: "Qual é a capital da França?", resposta: "Paris" },
+    { pergunta: "Quanto é 2 + 2?", resposta: "4" },
+    { pergunta: "O que significa a sigla 'AI'?", resposta: "Artificial Intelligence" },
+    { pergunta: "Qual planeta é conhecido como o Planeta Vermelho?", resposta: "Marte" }
+];
+
+let indiceAtual = 0;
+const card = document.getElementById('card');
+const elementoPergunta = document.getElementById('pergunta');
+const elementoResposta = document.getElementById('resposta');
+
+// Função para desvirar ou virar o card
+function virarCard() {
+    card.classList.toggle('virado');
+}
+
+// Função para passar para o próximo card
+function proximoCard() {
+    // Se a carta estiver virada, desvira primeiro antes de mudar o texto
+    if (card.classList.contains('virado')) {
+        card.classList.remove('virado');
+        // Espera o tempo da animação para trocar o texto de forma suave
+        setTimeout(atualizarCard, 300);
+    } else {
+        atualizarCard();
+    }
+}
+
+function atualizarCard() {
+    indiceAtual = (indiceAtual + 1) % deck.length; // Volta pro início se acabar
+    elementoPergunta.innerText = deck[indiceAtual].pergunta;
+    elementoResposta.innerText = deck[indiceAtual].resposta;
+}
